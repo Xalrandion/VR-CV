@@ -1,0 +1,22 @@
+{
+  "name": "XRCV",
+  "version": "1.0.0",
+  "description": "Why not ? ",
+  "main": "index.js",
+  "repository": "git@github.com:Xalrandion/expert-parakeet.git",
+  "author": "Xalrandion <alexgotte2@gmail.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "@babylonjs/core": "^4.2.2",
+    "@babylonjs/inspector": "^4.2.2",
+    "@babylonjs/materials": "^4.2.2",
+    "ts-loader": "^9.2.8",
+    "typescript": "^4.6.3",
+    "webpack": "^5.70.0",
+    "webpack-cli": "^4.9.2",
+    "webpack-dev-server": "^4.7.4"
+  },
+  "dependencies": {
+    "@babylonjs/gui": "^4.2.2"
+  }
+}
