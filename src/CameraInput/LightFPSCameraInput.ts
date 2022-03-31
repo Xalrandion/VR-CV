@@ -1,9 +1,9 @@
 import "@babylonjs/core"
 import "@babylonjs/core/Meshes/meshBuilder";
-import { Engine, EventState, ICameraInput, Observer, PointerEventTypes, PointerInfo, UniversalCamera, Vector3 } from "@babylonjs/core";
+import { Engine, EventState, FreeCamera, ICameraInput, Observer, PointerEventTypes, PointerInfo, UniversalCamera, Vector3 } from "@babylonjs/core";
 import { KeyBoardCommandKeys, MouseCommands } from "./Commands";
 
-type CameraInput = ICameraInput<UniversalCamera>
+type CameraInput = ICameraInput<FreeCamera>
 type KeyboardEventHandler = (this: HTMLElement, evt: KeyboardEvent) => any
 type MouseElementEventHandler = (this: HTMLElement, evt: MouseEvent) => any
 type MouseEventHandler = (info: PointerInfo, evtState: EventState) => any 
@@ -127,6 +127,7 @@ export class LightFPSKeyboardCameraInput implements CameraInput {
         const speed = this.camera.speed;
         this._keysToHandleQueue.forEach((key) => {
             if (this.isKeyInKeySet(this.keysDown, key)) {
+                
                 this.camera.cameraDirection = this.camera.getDirection(new Vector3(0, 0, 1)).scale(-speed)
             }
             else if (this.isKeyInKeySet(this.keysUp, key)) {
@@ -218,7 +219,7 @@ export class LightFPSMouseCameraInput implements CameraInput {
                 return;
             }
 
-            if (evt.button === MouseCommands.RIGHT) {
+            if (evt.button === MouseCommands.LEFT) {
                 _this.handleRightButton(info, evt, noPreventDefault, element);
             }
 
