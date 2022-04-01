@@ -6,6 +6,9 @@
   "repository": "git@github.com:Xalrandion/expert-parakeet.git",
   "author": "Xalrandion <alexgotte2@gmail.com>",
   "license": "MIT",
+  "scripts": {
+    "build": "webpack --mode=production"
+  },
   "devDependencies": {
     "@babylonjs/core": "^4.2.2",
     "@babylonjs/inspector": "^4.2.2",
