@@ -1,3 +1,12 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:5aa8618a9b9a61c7b9736f66eebce139580805e476b08d408fbcd3263e941ddb
-size 238
+# Blender MTL File: 'station.blend'
+# Material Count: 1
+
+newmtl Material
+Ns 323.999994
+Ka 1.000000 1.000000 1.000000
+Kd 0.800000 0.800000 0.800000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 2
