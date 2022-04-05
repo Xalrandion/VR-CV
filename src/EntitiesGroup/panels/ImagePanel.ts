@@ -16,6 +16,7 @@ export class ImagePanel extends Panel {
         image.paddingTop = 50
         image.paddingRight = 50
         image.paddingLeft = 50
+        image.stretch = Image.STRETCH_FILL
 
         this.uiTexture.addControl(image);
 

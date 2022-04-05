@@ -214,15 +214,15 @@ async function start() {
     shadowCasters.push(station8.mesh)
     shadowCasters.push(station9.mesh)
 
-    const pan1 = new WallStation(scene, "./station/diffuse.png", [strings.projects.view3.title, strings.projects.view3.desc]);
+    const pan1 = new WallStation(scene, "./projects/view3.png", [strings.projects.view3.title, strings.projects.view3.desc]);
     pan1.mesh.position = new Vector3(-8, 1.4, -5.5)
     pan1.mesh.rotation.y = Tools.ToRadians(270)
 
-    const pan2 = new WallStation(scene, "./station/diffuse.png", [strings.projects.raytracing.title, strings.projects.raytracing.desc]);
+    const pan2 = new WallStation(scene, "./projects/raytracer.png", [strings.projects.raytracing.title, strings.projects.raytracing.desc]);
     pan2.mesh.position = new Vector3(-8, 1.4, 5.5)
     pan2.mesh.rotation.y = Tools.ToRadians(270)
 
-    const pan11 = new WallStation(scene, "./station/diffuse.png", [strings.projects.vrcv.title, strings.projects.vrcv.desc]);
+    const pan11 = new WallStation(scene, "./projects/vrcv.png", [strings.projects.vrcv.title, strings.projects.vrcv.desc]);
     pan11.mesh.position = new Vector3(7.9, 1.4, 5.5)
     pan11.mesh.rotation.y = Tools.ToRadians(90)
     
