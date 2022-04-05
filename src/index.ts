@@ -21,6 +21,8 @@ import { TestPanel } from "./EntitiesGroup/panels/testPanel";
 import { ImagePanel } from "./EntitiesGroup/panels/ImagePanel";
 import { Topic, TopicPanel } from "./EntitiesGroup/panels/topicPanel";
 import { strings } from "./Strings";
+import { TextStackPanel } from "./EntitiesGroup/panels/TextPanel";
+import { WelcomePanel } from "./EntitiesGroup/panels/WelcomePanel";
 
 
 async function start() {
@@ -182,7 +184,7 @@ async function start() {
     // baseStationMat.diffuseColor = new Color3(1, 1, 1)
     meshes.meshes[0].material = baseStationMat;
 
-    const pan = new TopicPanel(scene, strings.topics.experiences);
+    const pan = new WelcomePanel(scene);
     const station = new Station(scene, pan);
 
     const pan3 = new TopicPanel(scene, strings.topics.experiences);
@@ -197,10 +199,10 @@ async function start() {
     const pan7 = new TopicPanel(scene, strings.topics.languages);
     const station7 = new Station(scene, pan7);
 
-    const pan8 = new TopicPanel(scene, strings.topics.experiences);
+    const pan8 = new TextStackPanel(scene, strings.singleStrings.contactPanelTitle, strings.contact);
     const station8 = new Station(scene, pan8);
 
-    const pan9 = new TopicPanel(scene, strings.topics.experiences);
+    const pan9 = new TextStackPanel(scene, "", strings.watchProjectStation);
     const station9 = new Station(scene, pan9);
 
     shadowCasters.push(station.mesh)

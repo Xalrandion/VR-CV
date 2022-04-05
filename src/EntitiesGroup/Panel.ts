@@ -69,7 +69,7 @@ export class Panel extends EntityGroup {
     light: PointLight
     uiTexture: AdvancedDynamicTexture
     
-    constructor(scene: Scene, bgColor: Color3 = Panel.panelColor) {
+    constructor(scene: Scene, bgColor: Color3) {
 
         super()
         this.scene = scene;

@@ -1,11 +1,48 @@
+import { TextWithCallback } from "./EntitiesGroup/panels/TextPanel";
 import { Topic } from "./EntitiesGroup/panels/topicPanel"
 
 
 interface StringDictionary  {
-    topics: {[name: string]: Topic}
+    topics: {[name: string]: Topic},
+    contact: TextWithCallback[]
+    singleStrings: {[name: string]: string}
+    
 }
 
 const strings = {
+    singleStrings: {
+        contactPanelTitle: "Contact",
+        welcomePanelTitle: "Bienvenue dans mon CV VR !",
+        welcomePanelText1: "Je suis un ingénieur informatique de 24 ans, passionné de technologie XR, et déterminé devenir expert dans le domaine. J’ai commencé mon parcours professionnel en travaillant avec succès comme développeur backend. Mais le monde de la réalité virtuelle m’ayant toujours intéressé j’ai décidé m’y consacrer pleinement.", 
+        welcomePanelText2: 'Mon objectif est de participer des projet ambitieux et innovants dans le domaine.',
+        welcomePanelText3: 'Mon objectif est de participer des projet ambitieux et innovants dans le domaine.'
+    },
+    watchProjectStation: [
+        {
+            str: "N’hésitez pas à jeter un œil sur mes projets sur les murs de cet espace !",
+            cb: () => {}
+        }
+    ],
+    contact: [
+        {
+            str: "E-mail: gotte.alexandre@gmail.com ↗",
+            cb: () => {
+                window.open("mailto:gotte.alexandre@gmail.com", "_blank").blur();
+            } 
+        },
+        {
+            str: "LinkedIn: linkedin.com/in/alexandre-gotte ↗",
+            cb: () => {
+                window.open("https://www.linkedin.com/in/alexandre-gotte/", "_blank").blur();
+            }
+        },
+        {
+            str: "Github: github.com/Xalrandion ↗",
+            cb: () => {
+                window.open("https://github.com/Xalrandion", "_blank").blur();
+            }
+        },
+    ],
     topics: {
         experiences: {
             topic: "Expériences professionnelles",
