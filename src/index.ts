@@ -29,10 +29,6 @@ import { WallStation } from "./EntitiesGroup/WallStation";
 async function start() {
 
     const groundLevel = 2.010;
-    const textTEST = "Bonjour, je suis un jeune ingénieur informatique passionné et déterminé à la recherche de défi. J’ai travaillé en tant que développeur backend/devops/mobile depuis mes premières expériences professionnelles, mais malgré une certaine réussite dans ces domaines, après avoir découvert le monde de la réalité virtuelle, j’ai tout arrêté pour m’y initier. \
-    Mon objectif est de devenir un expert et de participer à de grand et innovant projet dans le domaine. \
-    Actuellement en recherche d’emploi ingénieur, réalité augmenté, réalité virtuelle."
-    
     // Get the canvas element from the DOM.
     const canvas = document.getElementById("renderCanvas") as HTMLCanvasElement; 
     
@@ -41,7 +37,7 @@ async function start() {
     
     // Create our first scene.
     var scene = new Scene(engine);
-    scene.debugLayer.show();
+    // scene.debugLayer.show();
     
 
     // Parameters : name, position, scene

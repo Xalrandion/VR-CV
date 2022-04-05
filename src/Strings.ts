@@ -49,7 +49,7 @@ const strings = {
     singleStrings: {
         contactPanelTitle: "Contact",
         welcomePanelTitle: "Bienvenue dans mon CV VR !",
-        welcomePanelText1: "Je suis un ingénieur informatique de 24 ans, passionné de technologie XR, et déterminé devenir expert dans le domaine. J’ai commencé mon parcours professionnel en travaillant avec succès comme développeur backend. Mais le monde de la réalité virtuelle m’ayant toujours intéressé j’ai décidé m’y consacrer pleinement.", 
+        welcomePanelText1: "Je suis un développeur informatique de 24 ans, passionné de technologie XR, et déterminé devenir expert dans le domaine. J’ai commencé mon parcours professionnel en travaillant avec succès comme développeur backend. Mais le monde de la réalité virtuelle m’ayant toujours intéressé j’ai décidé m’y consacrer pleinement.", 
         welcomePanelText2: 'Mon objectif est de participer des projet ambitieux et innovants dans le domaine.',
         welcomePanelText3: 'Mon objectif est de participer des projet ambitieux et innovants dans le domaine.'
     },
