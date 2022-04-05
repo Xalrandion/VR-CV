@@ -13,10 +13,14 @@ import { GridMaterial } from "@babylonjs/materials/grid";
 import "@babylonjs/core/Meshes/meshBuilder";
 import { MeshBuilder } from "@babylonjs/core/Meshes/meshBuilder";
 import "@babylonjs/core"
-import { CubeTexture, MultiMaterial, PointLight, SceneLoader, SpotLight, StandardMaterial, Texture, Tools } from "@babylonjs/core";
-import { TestPanel } from "./EntitiesGroup/Panel";
+import { AbstractMesh, CubeTexture, MultiMaterial, PointLight, SceneLoader, ShadowGenerator, SpotLight, StandardMaterial, Texture, Tools } from "@babylonjs/core";
 import { Station } from "./EntitiesGroup/Station";
 import { Player } from "./EntitiesGroup/Player";
+import { WallLight } from "./EntitiesGroup/WallLight";
+import { TestPanel } from "./EntitiesGroup/panels/testPanel";
+import { ImagePanel } from "./EntitiesGroup/panels/ImagePanel";
+import { Topic, TopicPanel } from "./EntitiesGroup/panels/topicPanel";
+import { strings } from "./Strings";
 
 
 async function start() {
@@ -40,9 +44,25 @@ async function start() {
     // Parameters : name, position, scene
 
     // This creates a light, aiming 0,1,0 - to the sky (non-mesh)
-    var light = new HemisphericLight("light1", new Vector3(0, 1, 0), scene);
-        light.intensity = 0.5;
+    // var light = new HemisphericLight("light1", new Vector3(0, -1, 0), scene);
+    // light.intensity = 1;
     
+    const shadowCasters: AbstractMesh[] = []
+   
+
+    const light1 = new WallLight(scene)
+    light1.light.position = new Vector3(7.5, 4, 0);
+
+    const light2 = new WallLight(scene)
+    light2.light.position = new Vector3(7.5, 4, -17);
+
+    const light3 = new WallLight(scene)
+    light3.light.position = new Vector3(-7.7, 4, -11);
+
+    const light4 = new WallLight(scene)
+    light4.light.position = new Vector3(-7.7, 4, 11);
+
+    const lights: PointLight[] = [light1.light, light2.light, light3.light, light4.light]
     // Create a grid material
 
     
@@ -60,29 +80,40 @@ async function start() {
 
     const roomMat1Diffuse = new Texture("./walls/diffuse.jpg", scene)
     roomMat1Diffuse.wAng = Tools.ToRadians(90)
-    roomMat1Diffuse.uScale = 10
-    roomMat1Diffuse.vScale = 5
+    roomMat1Diffuse.uScale = 30
+    roomMat1Diffuse.vScale = 30
+    roomMat1.diffuseColor = new Color3(0.663, 0.753, 0.925)
     roomMat1.diffuseTexture = roomMat1Diffuse
+
+    const roomMat1Specular = new Texture("./walls/roughness.jpg", scene)
+    roomMat1Specular.wAng = Tools.ToRadians(90)
+    roomMat1Specular.uScale = 30
+    roomMat1Specular.vScale = 30
+    roomMat1.specularTexture = roomMat1Specular;
 
     const roomMat1Amb = new Texture("./walls/ambientOcclusion.jpg", scene)
     roomMat1Amb.wAng = Tools.ToRadians(90)
-    roomMat1Amb.uScale = 10
-    roomMat1Amb.vScale = 5
+    roomMat1Amb.uScale = 30
+    roomMat1Amb.vScale = 30
     roomMat1.ambientTexture = roomMat1Amb;
     const roomMat1Normal = new Texture("./walls/normal.jpg", scene)
     roomMat1Normal.wAng = Tools.ToRadians(90)
-    roomMat1Normal.uScale = 10
-    roomMat1Normal.vScale = 5
+    roomMat1Normal.uScale = 30
+    roomMat1Normal.vScale = 30
     roomMat1.bumpTexture = roomMat1Normal
     roomMat1.invertNormalMapX = true
     roomMat1.invertNormalMapY = true
 
 
     const roomMat2 = new StandardMaterial("roomMat2", scene);
-    roomMat2.diffuseColor = new Color3(0, 0.420, 1)
+    roomMat2.diffuseColor = new Color3(0, 0.420, 1);
+    roomMat2.specularColor = new Color3(0, 0.420, 1);
+    roomMat2.specularPower = 128;
     roomMat2.alpha = 0.5
     const roomMat3 = new StandardMaterial("roomMat3", scene);
-    roomMat3.diffuseColor = new Color3(0, 0, 0)
+    roomMat3.diffuseColor = new Color3(0.298, 0.298, 0.298)
+    roomMat3.specularPower = 128
+    roomMat3.specularColor = new Color3()
     const roomMat = new MultiMaterial("roomMat", scene)
     roomMat.subMaterials.push(roomMat1);
     roomMat.subMaterials.push(roomMat2);
@@ -97,21 +128,23 @@ async function start() {
     room.material = roomMat;
 
     // Our built-in 'ground' shape. Params: name, width, depth, subdivs, scene
-    const ground = Mesh.CreateGround("ground", 35, 50, 2, scene);
+    const ground = Mesh.CreateGround("ground", 17, 40, 2, scene);
+    ground.position.z = -5
+    ground.receiveShadows = true
     const groundMat = new StandardMaterial("groundMat", scene);
 
     const grounddiffuse = new Texture("./floor/diffuse.jpg", scene)
-    grounddiffuse.uScale = 10
-    grounddiffuse.vScale = 10
+    grounddiffuse.uScale = 22
+    grounddiffuse.vScale = 35
     groundMat.diffuseTexture = grounddiffuse
 
     const groundAmb = new Texture("./floor/ambientOcclusion.jpg", scene)
-    groundAmb.uScale = 10
-    groundAmb.vScale = 10
+    groundAmb.uScale = 22
+    groundAmb.vScale = 35
     groundMat.ambientTexture = groundAmb;
     const groundNormal = new Texture("./floor/normal.jpg", scene)
-    groundNormal.uScale = 10
-    groundNormal.vScale = 10
+    groundNormal.uScale = 22
+    groundNormal.vScale = 35
     groundMat.bumpTexture = groundNormal
     groundMat.invertNormalMapX = true
     groundMat.invertNormalMapY = true
@@ -145,29 +178,38 @@ async function start() {
     meshes.meshes[0].name = "baseStationMesh"
     const baseStationMat = new StandardMaterial("baseStationMat", scene)
     baseStationMat.diffuseTexture = new Texture("./station/diffuse.png", scene)
+    baseStationMat.bumpTexture = new Texture("./station/normal.png", scene)
+    // baseStationMat.diffuseColor = new Color3(1, 1, 1)
     meshes.meshes[0].material = baseStationMat;
 
- 
-    const pan = new TestPanel(scene);
+    const pan = new TopicPanel(scene, strings.topics.experiences);
     const station = new Station(scene, pan);
 
-    const pan3 = new TestPanel(scene);
+    const pan3 = new TopicPanel(scene, strings.topics.experiences);
     const station3 = new Station(scene, pan3);
 
-    const pan4 = new TestPanel(scene);
+    const pan4 = new TopicPanel(scene, strings.topics.skills);
     const station4 = new Station(scene, pan4);
 
-    const pan6 = new TestPanel(scene);
+    const pan6 = new TopicPanel(scene, strings.topics.education);
     const station6 = new Station(scene, pan6);
    
-    const pan7 = new TestPanel(scene);
+    const pan7 = new TopicPanel(scene, strings.topics.languages);
     const station7 = new Station(scene, pan7);
 
-    const pan8 = new TestPanel(scene);
+    const pan8 = new TopicPanel(scene, strings.topics.experiences);
     const station8 = new Station(scene, pan8);
 
-    const pan9 = new TestPanel(scene);
+    const pan9 = new TopicPanel(scene, strings.topics.experiences);
     const station9 = new Station(scene, pan9);
+
+    shadowCasters.push(station.mesh)
+    shadowCasters.push(station3.mesh)
+    shadowCasters.push(station4.mesh)
+    shadowCasters.push(station6.mesh)
+    shadowCasters.push(station7.mesh)
+    shadowCasters.push(station8.mesh)
+    shadowCasters.push(station9.mesh)
 
     const pan1 = new TestPanel(scene, new Color3(1, 1, 1));
     pan1.mesh.position = new Vector3(-8, 3, -5.5)
@@ -175,7 +217,7 @@ async function start() {
     pan1.mesh.scaling.x = 2
     pan1.mesh.scaling.y = 2
 
-    const pan2 = new TestPanel(scene, new Color3(1, 1, 1));
+    const pan2 = new ImagePanel(scene, "./station/diffuse.png", new Color3(1, 1, 1));
     pan2.mesh.position = new Vector3(-8, 3, 5.5)
     pan2.mesh.rotation.y = Tools.ToRadians(270)
     pan2.mesh.scaling.x = 2
@@ -194,7 +236,9 @@ async function start() {
     pan12.mesh.scaling.y = 2
 
     // const randomBox = MeshBuilder.CreateBox("randomBox", {size: 1}, scene);
-    // const wallSpotLight = new PointLight("pointLight", new Vector3(7, 5, 0), scene);
+    // const wallSpotLight = new PointLight("pointLight", new Vector3(6, 5, 0), scene);
+    // wallSpotLight.intensity = 10
+    // var ddd = new SpotLight("spotLight", new Vector3(0, 1, -10), new Vector3(0, -1, 0), Math.PI / 3, 2, scene);
     // randomBox.parent = wallSpotLight;
 
     scene.registerBeforeRender(() => {
@@ -203,16 +247,21 @@ async function start() {
     })
 
     // scene layout
-    station.mesh.position = new Vector3(0, 1, -19)
-    station3.mesh.position = new Vector3(3, 1, -14)
-    station4.mesh.position = new Vector3(-3, 1, -10)
-    station6.mesh.position = new Vector3(3, 1, -6)
-    station7.mesh.position = new Vector3(-3, 1, -2)
-    station8.mesh.position = new Vector3(3, 1, 2)
-    station9.mesh.position = new Vector3(-3, 1, 6)
+    station.mesh.position = new Vector3(0, 0.5, -19)
+    station3.mesh.position = new Vector3(3, 0.5, -14)
+    station4.mesh.position = new Vector3(-3, 0.5, -10)
+    station6.mesh.position = new Vector3(3, 0.5, -6)
+    station7.mesh.position = new Vector3(-3, 0.5, -2)
+    station8.mesh.position = new Vector3(3, 0.5, 2)
+    station9.mesh.position = new Vector3(-3, 0.5, 6)
     
 
     player.fpsCamera.position = new Vector3(0, groundLevel, -22.48)
+
+    lights.forEach((l) => {
+        const shadowgen = new ShadowGenerator(1024, l); 
+        shadowgen.getShadowMap().renderList.push(...shadowCasters);
+    })
 
     // Render every frame
     engine.runRenderLoop(() => {
