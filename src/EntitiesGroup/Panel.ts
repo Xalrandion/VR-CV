@@ -3,6 +3,7 @@ import "@babylonjs/core/Meshes/meshBuilder";
 import { Animatable, Animation, Color3, Light, Mesh, MeshBuilder, PointLight, Scene, StandardMaterial, Vector3 } from "@babylonjs/core";
 import { EntityGroup } from "./EntityGroup";
 import { EntitiesGroupManger } from "./EntitiesGroupManger";
+import { AdvancedDynamicTexture } from "@babylonjs/gui";
 
 export class Panel extends EntityGroup {
 
@@ -66,6 +67,7 @@ export class Panel extends EntityGroup {
     animationHandle: Animatable
     lightAnimationHandle: Animatable
     light: PointLight
+    uiTexture: AdvancedDynamicTexture
     
     constructor(scene: Scene, bgColor: Color3 = Panel.panelColor) {
 
@@ -81,6 +83,8 @@ export class Panel extends EntityGroup {
         this.mesh.animations.push(meshAnim);
         this.light.animations.push(lightAnim);
         this.material.disableLighting = true
+        this.uiTexture = AdvancedDynamicTexture.CreateForMeshTexture(this.mesh);
+        this.material.emissiveTexture = this.uiTexture;
 
         EntitiesGroupManger.add(this);
     }

@@ -5,29 +5,30 @@ import { AdvancedDynamicTexture, TextBlock, Button, StackPanel, Control, Rectang
 import { Panel } from "../Panel";
 
 
-type PageGenerator = () => [Control, string]; // controll and title
+interface PageGenerator {
+    pageBuilder: (idx: number) => [Control, string]
+    pageMax: number
+} // controll and title
  
 export class PagePanel extends Panel {
 
-
     contentIdx = 0;
-    pageGenerators: PageGenerator[]
+    pageGen: PageGenerator
 
-    constructor(scene: Scene, pageGens: PageGenerator[] ,bgColor: Color3 = Panel.panelColor) {
+    constructor(scene: Scene, pageGen: PageGenerator, bgColor: Color3 = Panel.panelColor) {
         super(scene, bgColor);
 
+        this.pageGen = pageGen; 
         const uiTexture = AdvancedDynamicTexture.CreateForMeshTexture(this.mesh);
-        this.pageGenerators = pageGens;
 
-        const [control, titlestr] = pageGens[0]();
-
+        const [page, titleStr] = this.pageGen.pageBuilder(this.contentIdx);
         const rect = new Rectangle("d")
         rect.height = "700px"
         rect.thickness = 0
         // rect.background = "red"
-        rect.addControl(control)
+        rect.addControl(page)
 
-        const title = new TextBlock(this.name + "-title", titlestr)
+        const title = new TextBlock(this.name + "-title", titleStr)
         title.textWrapping = true
         title.paddingLeft = 50
         title.paddingRight = 50
@@ -37,42 +38,58 @@ export class PagePanel extends Panel {
         title.color = "white"
         title.resizeToFit = true
 
-        var button1 = Button.CreateSimpleButton(this.name + "-button-1", "Next");
-        button1.width = "100px";
-        button1.height = "170px";
+        const buttonSpacer = new Rectangle(this.name + "button-spacer")
+        buttonSpacer.width = "20px"
+        buttonSpacer.thickness = 0
+
+
+        const button1 = Button.CreateSimpleButton(this.name + "-button-1", "Page suivante →");
+        button1.width = "400px";
+        button1.height = "130px";
         button1.color = "white";
         button1.fontSize = 50;
         button1.onPointerUpObservable.add(() => {
 
             const idx = this.nextContentIdx()
-            const [control, titlestr] = pageGens[idx]();
-            rect.clearControls()
-            rect.addControl(control)
-            title.text = titlestr
+            const [page, titleStr] = this.pageGen.pageBuilder(idx);
+            
+            rect.clearControls();
+            rect.addControl(page);
+            title.text = titleStr;
+            
+            button1.isVisible = !this.isLastPage()
+            button2.isVisible = !this.isFirstPage()
         });
         button1.isFocusInvisible = true
         button1.isEnabled = true
+        button1.isVisible = !this.isLastPage()
 
-        var button2 = Button.CreateSimpleButton(this.name + "-button-2", "Prev");
+        const button2 = Button.CreateSimpleButton(this.name + "-button-2", "←");
         button2.width = "100px";
-        button2.height = "170px";
+        button2.height = "130px";
         button2.color = "white";
         button2.fontSize = 50;
         button2.onPointerUpObservable.add(() => {
 
             const idx = this.prevContentIdx()
-            const [control, titlestr] = pageGens[idx]();
-            rect.clearControls()
-            rect.addControl(control)
-            title.text = titlestr
+            const [page, titleStr] = this.pageGen.pageBuilder(idx);
+
+            rect.clearControls();
+            rect.addControl(page);
+            title.text = titleStr;
+
+            button1.isVisible = !this.isLastPage()
+            button2.isVisible = !this.isFirstPage()
         });
         button2.isFocusInvisible = true
         button2.isEnabled = true
+        button2.isVisible = !this.isFirstPage()
 
         const constrollStacker = new StackPanel()
         constrollStacker.isVertical = false
         constrollStacker.height = "200px";
         constrollStacker.addControl(button2);
+        constrollStacker.addControl(buttonSpacer)
         constrollStacker.addControl(button1);
 
         const mainstacker = new StackPanel();
@@ -87,18 +104,21 @@ export class PagePanel extends Panel {
         mainstacker.addControl(constrollStacker);
 
         uiTexture.addControl(mainstacker);
-        this.material.emissiveTexture = uiTexture;
     }
 
     isLastPage(): boolean {
-        return this.contentIdx == this.pageGenerators.length - 1
+        return this.contentIdx == this.pageGen.pageMax
+    }
+
+    isFirstPage(): boolean {
+        return this.contentIdx == 0;
     }
 
 
     nextContentIdx(): number {
         this.contentIdx += 1;
-        if (this.contentIdx >= this.pageGenerators.length) {
-            this.contentIdx = this.pageGenerators.length - 1;
+        if (this.contentIdx > this.pageGen.pageMax) {
+            this.contentIdx = this.pageGen.pageMax;
         }
         return this.contentIdx;
     }

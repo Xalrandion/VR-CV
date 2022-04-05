@@ -11,15 +11,13 @@ export class ImagePanel extends Panel {
 
         this.material.emissiveColor = new Color3(0, 0, 0); // to make the image appear
 
-        const uiTexture = AdvancedDynamicTexture.CreateForMeshTexture(this.mesh);
         const image = new Image(this.name + "-img", imagePath);
         image.paddingBottom = 50
         image.paddingTop = 50
         image.paddingRight = 50
         image.paddingLeft = 50
 
-        uiTexture.addControl(image);
+        this.uiTexture.addControl(image);
 
-        this.material.emissiveTexture = uiTexture;
     }
 }

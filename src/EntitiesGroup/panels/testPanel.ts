@@ -20,8 +20,6 @@ export class TestPanel extends Panel {
     constructor(scene: Scene, bgColor: Color3 = Panel.panelColor) {
         super(scene, bgColor);
 
-        const uiTexture = AdvancedDynamicTexture.CreateForMeshTexture(this.mesh);
-
         var textBloc1 = new TextBlock(this.name + "-textBloc-1", textTEST)
         textBloc1.textWrapping = true
         textBloc1.paddingLeft = 50
@@ -100,7 +98,6 @@ export class TestPanel extends Panel {
         mainstacker.addControl(grid);
         mainstacker.addControl(constrollStacker);
 
-        uiTexture.addControl(mainstacker);
-        this.material.emissiveTexture = uiTexture;
+        this.uiTexture.addControl(mainstacker);
     }
 }

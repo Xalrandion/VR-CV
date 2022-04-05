@@ -4,15 +4,6 @@ import "@babylonjs/core/Meshes/meshBuilder";
 import { AdvancedDynamicTexture, TextBlock, Button, StackPanel, Control, Rectangle, Grid } from "@babylonjs/gui";
 import { Panel } from "../Panel";
 
-const textTEST = "Bonjour, je suis un jeune ingénieur informatique passionné et déterminé à la recherche de défi. J’ai travaillé en tant que développeur backend/devops/mobile depuis mes premières expériences professionnelles, mais malgré une certaine réussite dans ces domaines, après avoir découvert le monde de la réalité virtuelle, j’ai tout arrêté pour m’y initier. \
-    Mon objectif est de devenir un expert et de participer à de grand et innovant projet dans le domaine. \
-    Actuellement en recherche d’emploi ingénieur, réalité augmenté, réalité virtuelle."
-
-const textTest2 = "If you can see this well it workded"
-
-const txtes = [textTEST, textTest2]
-var txtesidx = 0;
-
 export interface Topic {
     topic: string
     content: TopicContent[]
@@ -34,8 +25,6 @@ export class TopicPanel extends Panel {
         super(scene, bgColor);
 
         this.topic = topic;
-        const uiTexture = AdvancedDynamicTexture.CreateForMeshTexture(this.mesh);
-        const _this = this;
 
         const contentStacker = new StackPanel(this.name + "-contentStack")
         contentStacker.isVertical = true
@@ -98,8 +87,8 @@ export class TopicPanel extends Panel {
         contentStacker.addControl(content)
 
         const buttonSpacer = new Rectangle(this.name + "button-spacer")
-        buttonSpacer.width = "20px"
-        buttonSpacer.thickness = 0
+        buttonSpacer.width = "30px"
+        buttonSpacer.thickness = 0;
 
 
         const button1 = Button.CreateSimpleButton(this.name + "-button-1", "Page suivante →");
@@ -156,8 +145,7 @@ export class TopicPanel extends Panel {
         mainstacker.addControl(rect);
         mainstacker.addControl(constrollStacker);
 
-        uiTexture.addControl(mainstacker);
-        this.material.emissiveTexture = uiTexture;
+        this.uiTexture.addControl(mainstacker);
     }
 
     isLastPage(): boolean {
