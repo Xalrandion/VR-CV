@@ -5,12 +5,15 @@ import { EntityGroup } from "./EntityGroup";
 import { EntitiesGroupManger } from "./EntitiesGroupManger";
 import { AdvancedDynamicTexture } from "@babylonjs/gui";
 
+export type PanelOpts = { width: number, height: number, depth: number }
+
 export class Panel extends EntityGroup {
 
     static readonly panelColor = new Color3(0.302, 0.329, 0.537);
     static readonly animationFramerate = 30;
     static readonly baseEnabledAlpha = 0.9;
     static readonly baseEnabledLightIntensity = 0.5;
+    static readonly basePanelOptions = { width: 2, height: 1.1, depth: 0.001 }
     static panelIdx = 0; // as long as the number of pannel stays resonable
     static nextPanelName(): string { this.panelIdx += 1; return `panel-${Panel.panelIdx}` }
     static createPanelBaseMaterial(scene: Scene, panelName: string, bgColor: Color3): StandardMaterial {
@@ -69,12 +72,12 @@ export class Panel extends EntityGroup {
     light: PointLight
     uiTexture: AdvancedDynamicTexture
     
-    constructor(scene: Scene, bgColor: Color3) {
+    constructor(scene: Scene, bgColor: Color3, meshOptions?: PanelOpts) {
 
         super()
         this.scene = scene;
         this.name = Panel.nextPanelName();
-        this.mesh = MeshBuilder.CreateBox(this.name, { width: 2, height: 1.1, depth: 0.001 }, scene);
+        this.mesh = MeshBuilder.CreateBox(this.name, meshOptions ?? Panel.basePanelOptions, scene);
         this.material = Panel.createPanelBaseMaterial(scene, this.name, bgColor); 
         this.mesh.material = this.material
         this.light = Panel.createPanelLight(this.name, this.mesh, scene, bgColor);

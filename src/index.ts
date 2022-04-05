@@ -23,6 +23,7 @@ import { Topic, TopicPanel } from "./EntitiesGroup/panels/topicPanel";
 import { strings } from "./Strings";
 import { TextStackPanel } from "./EntitiesGroup/panels/TextPanel";
 import { WelcomePanel } from "./EntitiesGroup/panels/WelcomePanel";
+import { WallStation } from "./EntitiesGroup/WallStation";
 
 
 async function start() {
@@ -213,29 +214,22 @@ async function start() {
     shadowCasters.push(station8.mesh)
     shadowCasters.push(station9.mesh)
 
-    const pan1 = new TestPanel(scene, new Color3(1, 1, 1));
-    pan1.mesh.position = new Vector3(-8, 3, -5.5)
+    const pan1 = new WallStation(scene, "./station/diffuse.png", [strings.projects.view3.title, strings.projects.view3.desc]);
+    pan1.mesh.position = new Vector3(-8, 1.4, -5.5)
     pan1.mesh.rotation.y = Tools.ToRadians(270)
-    pan1.mesh.scaling.x = 2
-    pan1.mesh.scaling.y = 2
 
-    const pan2 = new ImagePanel(scene, "./station/diffuse.png", new Color3(1, 1, 1));
-    pan2.mesh.position = new Vector3(-8, 3, 5.5)
+    const pan2 = new WallStation(scene, "./station/diffuse.png", [strings.projects.raytracing.title, strings.projects.raytracing.desc]);
+    pan2.mesh.position = new Vector3(-8, 1.4, 5.5)
     pan2.mesh.rotation.y = Tools.ToRadians(270)
-    pan2.mesh.scaling.x = 2
-    pan2.mesh.scaling.y = 2
 
-    const pan11 = new TestPanel(scene, new Color3(1, 1, 1));
-    pan11.mesh.position = new Vector3(7.9, 3, -5.5)
-    pan11.mesh.rotation.y = Tools.ToRadians(270)
-    pan11.mesh.scaling.x = 2
-    pan11.mesh.scaling.y = 2
+    const pan11 = new WallStation(scene, "./station/diffuse.png", [strings.projects.vrcv.title, strings.projects.vrcv.desc]);
+    pan11.mesh.position = new Vector3(7.9, 1.4, 5.5)
+    pan11.mesh.rotation.y = Tools.ToRadians(90)
+    
+    // const pan12 = new WallStation(scene, "./station/diffuse.png");
+    // pan12.mesh.position = new Vector3(7.9, 1.4, -5.5)
+    // pan12.mesh.rotation.y = Tools.ToRadians(90)
 
-    const pan12 = new TestPanel(scene, new Color3(1, 1, 1));
-    pan12.mesh.position = new Vector3(7.9, 3, 5.5)
-    pan12.mesh.rotation.y = Tools.ToRadians(270)
-    pan12.mesh.scaling.x = 2
-    pan12.mesh.scaling.y = 2
 
     // const randomBox = MeshBuilder.CreateBox("randomBox", {size: 1}, scene);
     // const wallSpotLight = new PointLight("pointLight", new Vector3(6, 5, 0), scene);

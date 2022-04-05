@@ -6,10 +6,46 @@ interface StringDictionary  {
     topics: {[name: string]: Topic},
     contact: TextWithCallback[]
     singleStrings: {[name: string]: string}
-    
+    projects: {[name: string]: {title: TextWithCallback, desc: string}}
 }
 
 const strings = {
+    projects: {
+        view3: {
+            title: {
+                str: "View 3 ↗",
+                cb: () => {
+                    window.open("https://github.com/Xalrandion/View3", "_blank").blur();
+                }
+            },
+            desc: "Un simple outil de creation de scene 3D avec des primitives (wip)"
+        },
+        raytracing: {
+            title: {
+                str: "raytracer ↗",
+                cb: () => {
+                    window.open("https://github.com/Xalrandion/learning-raytracing", "_blank").blur();
+                }
+            },
+            desc: "Un simple raytracer pour en comprendre le fonctionnement"
+        },
+        vrcv: {
+            title: {
+                str: "VR-CV ↗",
+                cb: () => {
+                    window.open("https://github.com/Xalrandion/VR-CV", "_blank").blur();
+                }
+            },
+            desc: "Vous êtes ici ↓"
+        },
+        slam: {
+            title: {
+                str: "S.L.A.M",
+                cb: () => { },
+            },
+            desc: "Un simple slam pour en comprendre le fonctionnement (coming soon)"
+        },
+    },
     singleStrings: {
         contactPanelTitle: "Contact",
         welcomePanelTitle: "Bienvenue dans mon CV VR !",

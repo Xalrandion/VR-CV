@@ -2,7 +2,7 @@ import "@babylonjs/core"
 import { Scene, Color3 } from "@babylonjs/core";
 import "@babylonjs/core/Meshes/meshBuilder";
 import { AdvancedDynamicTexture, TextBlock, Button, StackPanel, Control, Rectangle, Grid } from "@babylonjs/gui";
-import { Panel } from "../Panel";
+import { Panel, PanelOpts } from "../Panel";
 import { PagePanel } from "./pagePanel";
 
 export interface TextWithCallback {
@@ -12,8 +12,8 @@ export interface TextWithCallback {
 
 export class TextStackPanel extends Panel {
 
-    constructor(scene: Scene, titleStr: string, texts: TextWithCallback[], bgColor: Color3 = Panel.panelColor) {
-        super(scene, bgColor);
+    constructor(scene: Scene, titleStr: string, texts: TextWithCallback[], bgColor: Color3 = Panel.panelColor, meshOpts?: PanelOpts) {
+        super(scene, bgColor, meshOpts);
 
         const mainstacker = new StackPanel();
         mainstacker.height = 1
