@@ -47,7 +47,7 @@ export class WelcomePanel extends PagePanel {
         contentStacker.isVertical = true
         contentStacker.height = "600px"
 
-        const commandsTB = new TextBlock(this.name + "-content", "←↑↓→ ou wasd pour bouger")
+        const commandsTB = new TextBlock(this.name + "-content", "←↑↓→ ou wasd pour se déplacer")
         commandsTB.textWrapping = true
         commandsTB.paddingLeft = 50
         commandsTB.paddingRight = 50
@@ -83,7 +83,7 @@ export class WelcomePanel extends PagePanel {
         vrTB.height = "150px"
         vrTB.lineSpacing = "4%"
 
-        const arrowTB = new TextBlock(this.name + "-content", "vous pouvez aussi cliquez sur les ↗ pour acceder au contenu associé")
+        const arrowTB = new TextBlock(this.name + "-content", "vous pouvez aussi cliquez sur ↗ pour acceder au contenu associé")
         arrowTB.textWrapping = true
         arrowTB.paddingLeft = 50
         arrowTB.paddingRight = 50
@@ -99,7 +99,7 @@ export class WelcomePanel extends PagePanel {
         contentStacker.addControl(cameraTB)
         contentStacker.addControl(vrTB)
         contentStacker.addControl(arrowTB)
-        return [contentStacker, "Tutoriel"]
+        return [contentStacker, "Naviguer dans mon CV virtuel:"]
     }
 
     genFullTextControl(str: string) {
@@ -112,7 +112,7 @@ export class WelcomePanel extends PagePanel {
         content.fontSize = 40
         content.color = "white"
         content.fontStyle = "italic"
-        content.height = "600px"
+        content.height = "650px"
         content.lineSpacing = "4%"
 
         return content;

@@ -49,13 +49,13 @@ const strings = {
     singleStrings: {
         contactPanelTitle: "Contact",
         welcomePanelTitle: "Bienvenue dans mon CV VR !",
-        welcomePanelText1: "Je suis un développeur informatique de 24 ans, passionné de technologie XR, et déterminé devenir expert dans le domaine. J’ai commencé mon parcours professionnel en travaillant avec succès comme développeur backend. Mais le monde de la réalité virtuelle m’ayant toujours intéressé j’ai décidé m’y consacrer pleinement.", 
-        welcomePanelText2: 'Mon objectif est de participer des projet ambitieux et innovants dans le domaine.',
+        welcomePanelText1: "Je suis développeur informatique, j'ai 24 ans, et suis passionné de technologie XR. Je suis déterminé à devenir expert dans le domaine. J’ai commencé mon parcours professionnel en travaillant avec succès comme développeur backend.", 
+        welcomePanelText2: 'L\'univers de la réalité virtuelle m’ayant toujours intéressé j’ai décidé m’y consacrer pleinement. Mon objectif est de participer à des projets ambitieux et innovants dans le domaine.',
         welcomePanelText3: 'Mon objectif est de participer des projet ambitieux et innovants dans le domaine.'
     },
     watchProjectStation: [
         {
-            str: "N’hésitez pas à jeter un œil sur mes projets sur les murs de cet espace !",
+            str: "N’hésitez pas à jeter un coup d'œil à mes projets sur les murs de cet espace !",
             cb: () => {}
         }
     ],
@@ -81,31 +81,31 @@ const strings = {
     ],
     topics: {
         experiences: {
-            topic: "Expériences professionnelles",
+            topic: "Expériences professionnelles:",
             content: [
                 {
                     title: "Unissey",
-                    subTitle: "Paris, avril 2020 - septembre 2021 : développeur informatique",
-                    content: "Création de backend micro-services et d’une application mobile pour une plateforme de reconnaissance faciale. Création et gestion des tests automatisés de la plateforme et intégration et gestion des services d’authentification."
+                    subTitle: "Paris, avril 2020 - septembre 2021 : développeur",
+                    content: "Création de backend micro-services et d’une application mobile pour une plateforme de reconnaissance faciale. Création et gestion des tests automatisés de la plateforme, intégration et gestion des services d’authentification."
                 },
                 {
                     title: "SFR",
-                    subTitle: "Paris, nov 2019 - mars 2020 : développeur informatique (stage)",
+                    subTitle: "Paris, nov 2019 - mars 2020 : développeur (stage)",
                     content: "Création de backend en micro-services dans le cadre d’un prototype d’un nouveau système. Création d’outils de manipulation de données (Kafka, Java)"
                 },
                 {
                     title: "Freelance",
-                    subTitle: "août 2018 - septembre 2019 : développeur informatique",
+                    subTitle: "août 2018 - septembre 2019 : développeur",
                     content: "Création et maintenance de backends. Création d’une application mobile, Maintenance de site internet."
                 },
                 {
                     title: "Riminder",
-                    subTitle: "Paris, avril 2018 - août 2018 (stage et freelance)",
+                    subTitle: "Paris, avril 2018 - août 2018 : développeur (stage et freelance)",
                     content: "Amélioration et maintenance de backend. Création de clients d’API de multiples langages. Création d’une application de bureau."
                 },
                 {
                     title: "Socloz",
-                    subTitle: "Paris, juillet 2016 - décembre 2016 (stage)",
+                    subTitle: "Paris, juillet 2016 - décembre 2016 : développeur (stage)",
                     content: "Migration de services vers un backend en GO. Création d’outils de manipulation de données pour divers clients."
                 }
             ]

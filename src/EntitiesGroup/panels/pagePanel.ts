@@ -44,7 +44,7 @@ export abstract class PagePanel extends Panel {
             buttonSpacer.thickness = 0
 
 
-            const button1 = Button.CreateSimpleButton(this.name + "-button-1", "Page suivante →");
+            const button1 = Button.CreateSimpleButton(this.name + "-button-1", "Page suivante");
             button1.width = "400px";
             button1.height = "130px";
             button1.color = "white";
