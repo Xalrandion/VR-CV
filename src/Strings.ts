@@ -13,9 +13,9 @@ const strings = {
     projects: {
         view3: {
             title: {
-                str: "View 3 ↗",
+                str: "View 3R ↗",
                 cb: () => {
-                    window.open("https://github.com/Xalrandion/View3", "_blank").blur();
+                    window.open("https://github.com/Xalrandion/View3R", "_blank").blur();
                 }
             },
             desc: "Un simple outil de creation de scene 3D avec des primitives (wip)"

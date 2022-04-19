@@ -2,7 +2,7 @@
 const KeyBoardCommandKeys = {
 
     LEFT: [37, 65],
-    RIGHT: [39, 82],
+    RIGHT: [39, 68],
     UP: [38, 87],
     DOWN: [40, 83],
     LOCK_ROTATION: [82],
